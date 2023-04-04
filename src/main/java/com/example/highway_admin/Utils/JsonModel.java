@@ -1,4 +1,4 @@
-package com.example.smart_admin.Utils;
+package com.example.highway_admin.Utils;
 
 public class JsonModel<T> {
     private String msg;

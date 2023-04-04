@@ -1,8 +1,6 @@
-package com.example.smart_admin.config;
+package com.example.highway_admin.config;
 
 
-
-import com.example.smart_admin.interceptor.loginFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;

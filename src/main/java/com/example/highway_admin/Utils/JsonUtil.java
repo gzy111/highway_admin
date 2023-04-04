@@ -1,4 +1,4 @@
-package com.example.smart_admin.Utils;
+package com.example.highway_admin.Utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

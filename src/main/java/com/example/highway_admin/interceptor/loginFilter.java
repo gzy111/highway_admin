@@ -1,10 +1,10 @@
-package com.example.smart_admin.interceptor;
+package com.example.highway_admin.interceptor;
 
-import com.example.smart_admin.Utils.JWTUtil;
-import com.example.smart_admin.Utils.JsonUtil;
-import com.example.smart_admin.Utils.RSAUtil;
+
+import com.example.highway_admin.Utils.JWTUtil;
+import com.example.highway_admin.Utils.JsonUtil;
+import com.example.highway_admin.Utils.RSAUtil;
 import com.github.pagehelper.util.StringUtil;
-
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;

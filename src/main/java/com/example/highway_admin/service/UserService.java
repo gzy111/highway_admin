@@ -1,2 +1,4 @@
-package com.example.highway_admin.service;public interface UserService {
+package com.example.highway_admin.service;
+
+public interface UserService {
 }

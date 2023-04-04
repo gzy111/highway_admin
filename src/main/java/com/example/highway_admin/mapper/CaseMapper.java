@@ -1,6 +1,7 @@
 package com.example.highway_admin.mapper;
 
 
+import com.example.highway_admin.base.countTable;
 import com.example.highway_admin.domain.Case;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,7 +15,7 @@ public interface CaseMapper {
 
     int insertSelective(Case record);
 
-    Case selectByPrimaryKey(Integer id);
+
 
     int updateByPrimaryKeySelective(Case record);
 
@@ -25,4 +26,8 @@ public interface CaseMapper {
     List<Case> selectByPrimaryKey();
 
     List<Case> selectByPrimaryKey(Case record);
+
+    List<Case> selectCountType(Case record);
+
+    int selectMaxID();
 }

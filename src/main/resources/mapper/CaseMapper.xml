@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.highway_admin.mapper.CaseMapper" >
+  <resultMap id="BaseResultMap" type="com.example.highway_admin.domain.Case" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="case_name" property="caseName" jdbcType="VARCHAR" />
+    <result column="case_type" property="caseType" jdbcType="VARCHAR" />
+    <result column="detailed_type" property="detailedType" jdbcType="VARCHAR" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="processing_time" property="processingTime" jdbcType="TIMESTAMP" />
+    <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="NewCount" property="newCount" javaType="INTEGER"/>
+  </resultMap>
+
+
+
+  <resultMap id="ResultMapWithBLOBs" type="com.example.highway_admin.domain.Case" extends="BaseResultMap" >
+    <result column="data" property="data" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_name, case_type, detailed_type, user, create_time, processing_time, finish_time, 
+    state, remark
+  </sql>
+  <sql id="Blob_Column_List" >
+    data
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.example.highway_admin.domain.Case" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from `case`
+    <trim prefix="where" prefixOverrides="and |or">
+      <if test="id!=null">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="state != null" >
+        and state = #{state,jdbcType=VARCHAR}
+      </if>
+      <if test="caseType != null" >
+        and case_type = #{caseType,jdbcType=VARCHAR}
+      </if>
+      <if test="detailedType != null" >
+        and detailed_type = #{detailedType,jdbcType=VARCHAR}
+      </if>
+      <if test="user != null" >
+        and user like concat('%',#{user,jdbcType=VARCHAR},'%')
+      </if>
+    </trim>
+  </select>
+<!--统计数量-->
+  <select id="selectCountType" resultMap="ResultMapWithBLOBs" parameterType="com.example.highway_admin.domain.Case">
+    select
+        case_type ,
+    <if test="detailedType!=null">
+      detailed_type,
+    </if>
+        count(1) as NewCount
+    from `case`
+    <trim prefix="where" prefixOverrides="and |or">
+      <if test="caseType!=null">
+        and case_type = #{caseType,jdbcType=VARCHAR}
+      </if>
+    </trim>
+    <trim prefix="group by " prefixOverrides="and |or">
+      <if test="detailedType!=null">
+        and detailed_type
+      </if>
+    </trim>
+  </select>
+
+  <select id="selectMaxID" resultType="integer" >
+    select max(c.id) from `case` c
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from `case`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.example.highway_admin.domain.Case" >
+    insert into `case` (id, case_name, case_type,
+      detailed_type, user, create_time, 
+      processing_time, finish_time, state, 
+      remark, data)
+    values (#{id,jdbcType=INTEGER}, #{caseName,jdbcType=VARCHAR}, #{caseType,jdbcType=VARCHAR}, 
+      #{detailedType,jdbcType=VARCHAR}, #{user,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{processingTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{data,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.highway_admin.domain.Case" >
+    insert into `case`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="caseName != null" >
+        case_name,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+      <if test="detailedType != null" >
+        detailed_type,
+      </if>
+      <if test="user != null" >
+        user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="processingTime != null" >
+        processing_time,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="caseName != null" >
+        #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedType != null" >
+        #{detailedType,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processingTime != null" >
+        #{processingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.highway_admin.domain.Case" >
+    update `case`
+    <set >
+      <if test="caseName != null" >
+        case_name = #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedType != null" >
+        detailed_type = #{detailedType,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processingTime != null" >
+        processing_time = #{processingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.highway_admin.domain.Case" >
+    update `case`
+    set case_name = #{caseName,jdbcType=VARCHAR},
+      case_type = #{caseType,jdbcType=VARCHAR},
+      detailed_type = #{detailedType,jdbcType=VARCHAR},
+      user = #{user,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      processing_time = #{processingTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.highway_admin.domain.Case" >
+    update `case`
+    set case_name = #{caseName,jdbcType=VARCHAR},
+      case_type = #{caseType,jdbcType=VARCHAR},
+      detailed_type = #{detailedType,jdbcType=VARCHAR},
+      user = #{user,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      processing_time = #{processingTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
