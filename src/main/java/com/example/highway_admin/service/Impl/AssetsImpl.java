@@ -1,5 +1,6 @@
 package com.example.highway_admin.service.Impl;
 
+import com.example.highway_admin.base.count;
 import com.example.highway_admin.domain.Assets;
 import com.example.highway_admin.mapper.AssetsMapper;
 import com.example.highway_admin.service.AssetsService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+
 public class AssetsImpl implements AssetsService {
     @Autowired
     AssetsMapper assetsMapper;
@@ -63,5 +65,15 @@ public class AssetsImpl implements AssetsService {
         Page<Assets> list = (Page<Assets>) assetsMapper.selectByPrimaryKey(record);
         PageInfo<Assets> pageInfo = list.toPageInfo();
         return pageInfo;
+    }
+
+    @Override
+    public List<count> selectCount(String assetsType) {
+        return assetsMapper.selectCount(assetsType);
+    }
+
+    @Override
+    public int selectMaxID() {
+        return assetsMapper.selectMaxID();
     }
 }

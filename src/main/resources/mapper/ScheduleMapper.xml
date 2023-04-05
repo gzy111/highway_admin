@@ -3,13 +3,19 @@
 <mapper namespace="com.example.highway_admin.mapper.ScheduleMapper" >
   <resultMap id="BaseResultMap" type="com.example.highway_admin.domain.Schedule" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
   </resultMap>
+
+  <resultMap id="CountMap" type="com.example.highway_admin.base.count">
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+
   <resultMap id="ResultMapWithBLOBs" type="com.example.highway_admin.domain.Schedule" extends="BaseResultMap" >
     <result column="data" property="data" jdbcType="LONGVARCHAR" />
   </resultMap>
@@ -19,6 +25,7 @@
   <sql id="Blob_Column_List" >
     data
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -29,8 +36,43 @@
       <if test="id!=null">
         and id = #{id,jdbcType=INTEGER}
       </if>
+      <if test="state!=null">
+        and state = #{state,jdbcType=VARCHAR}
+      </if>
+      <if test="userId!=null">
+        and user_id  like concat('%',#{user_id,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="data!=null">
+        and data  like concat('%',#{data,jdbcType=VARCHAR},'%')
+      </if>
     </trim>
   </select>
+
+  <select id="selectCount" resultMap="CountMap">
+    SELECT
+    <if test="type!=null">
+      type as name,
+    </if>
+    <if test="state!=null">
+      state as name,
+    </if>
+    COUNT(1) as  count
+    FROM schedule
+    <trim prefix="group by " prefixOverrides="and |or">
+      <if test="type!=null">
+        type
+      </if>
+      <if test="state!=null">
+        state
+      </if>
+    </trim>
+  </select>
+
+
+  <select id="selectMaxID" resultType="integer" >
+    select max(id) from schedule
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from schedule
     where id = #{id,jdbcType=INTEGER}

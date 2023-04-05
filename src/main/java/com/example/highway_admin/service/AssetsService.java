@@ -1,5 +1,6 @@
 package com.example.highway_admin.service;
 
+import com.example.highway_admin.base.count;
 import com.example.highway_admin.domain.Assets;
 import com.github.pagehelper.PageInfo;
 
@@ -23,4 +24,8 @@ public interface AssetsService {
     List<Assets> selectByPrimaryKey();
 
     PageInfo<Assets> selectByPrimaryKey(Assets record);
+
+    List<count> selectCount(String assetsType);
+
+    int selectMaxID();
 }

@@ -1,5 +1,6 @@
 package com.example.highway_admin.mapper;
 
+import com.example.highway_admin.base.count;
 import com.example.highway_admin.domain.Assets;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -24,4 +25,8 @@ public interface AssetsMapper {
     List<Assets> selectByPrimaryKey();
 
     List<Assets> selectByPrimaryKey(Assets record);
+
+    List<count>  selectCount(String assetsType);
+
+    int selectMaxID();
 }

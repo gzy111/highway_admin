@@ -12,6 +12,12 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap id="CountMap" type="com.example.highway_admin.base.count">
+    <result column="assets_type" property="name" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+
   <resultMap id="ResultMapWithBLOBs" type="com.example.highway_admin.domain.Assets" extends="BaseResultMap" >
     <result column="assets_data" property="assetsData" jdbcType="LONGVARCHAR" />
   </resultMap>
@@ -31,7 +37,37 @@
       <if test="id!=null">
         and id = #{id,jdbcType=INTEGER}
       </if>
+      <if test="assetsCode!=null">
+        and assets_code like concat('%',#{assetsCode,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="assetsName!=null">
+        and assets_name like concat('%',#{assetsName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="assetsType!=null">
+        and assets_type = #{assetsType,jdbcType=VARCHAR}
+      </if>
+      <if test="state!=null">
+        and state = #{state,jdbcType=VARCHAR}
+      </if>
     </trim>
+  </select>
+
+  <select id="selectCount" resultMap="CountMap">
+    SELECT
+    <if test="assetsType!=null">
+      assets_type,
+    </if>
+           COUNT(1) as  count
+    FROM assets
+    <trim prefix="group by " prefixOverrides="and |or">
+      <if test="assetsType!=null">
+        and assets_type
+      </if>
+    </trim>
+  </select>
+
+  <select id="selectMaxID" resultType="integer" >
+    select max(id) from assets
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from assets

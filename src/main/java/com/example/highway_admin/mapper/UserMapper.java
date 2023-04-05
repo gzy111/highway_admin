@@ -24,4 +24,6 @@ public interface UserMapper {
     List<User> selectByPrimaryKey();
 
     List<User> selectByPrimaryKey(User record);
+
+    int selectMaxID();
 }

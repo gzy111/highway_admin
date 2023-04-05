@@ -24,7 +24,7 @@ public class CaseController {
     CaseService caseService;
 
 
-
+    @GetMapping("/delete")
     @ApiOperation(value = "删除案件", notes = "成功返回1")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "案件id",required = true,dataType = "integer", paramType = "query"),
@@ -55,14 +55,14 @@ public class CaseController {
             @ApiImplicitParam(name = "data", value = "案件信息", dataType = "String", paramType = "query"),
     })
     @PostMapping("/insert")
-    public JsonModel<Integer>  insertSelective( Case record) {
+    public JsonModel<Integer>  insertSelective(  Case record) {
         System.out.println(record);
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             record.setCreateTime(new Date());
             record.setId(caseService.selectMaxID()+1);
             record.setState("2");
-            jsonModel.setData(caseService.updateByPrimaryKeySelective(record));
+            jsonModel.setData(caseService.insertSelective(record));
             jsonModel.setCode(200);
             jsonModel.setMsg("添加成功");
         }catch (Exception e){
@@ -80,7 +80,7 @@ public class CaseController {
             @ApiImplicitParam(name = "id", value = "案件id",required = true,defaultValue = "",dataType = "integer", paramType = "query"),
             @ApiImplicitParam(name = "detailedType", value = "事故类型",dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "caseType", value = "案件类型",dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "state", value = "状态",dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "state", value = "状态", required = true,dataType = "String",paramType = "query"),
             @ApiImplicitParam(name = "user", value = "处理员工", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "caseName", value = "案件名称", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "data", value = "案件信息", dataType = "String", paramType = "query"),
@@ -88,9 +88,9 @@ public class CaseController {
     public JsonModel<Integer> updateByPrimaryKeySelective(Case record) {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
-            if (record.getState()=="0"){
+            if (record.getState().equals("0")){
                 record.setProcessingTime(new Date());
-            }else if(record.getState()=="1"){
+            }else if(record.getState().equals("1")){
                 record.setFinishTime(new Date());
             }
 

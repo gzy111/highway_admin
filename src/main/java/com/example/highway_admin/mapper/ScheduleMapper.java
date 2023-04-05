@@ -1,6 +1,7 @@
 package com.example.highway_admin.mapper;
 
 
+import com.example.highway_admin.base.count;
 import com.example.highway_admin.domain.Schedule;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,4 +26,8 @@ public interface ScheduleMapper {
     List<Schedule> selectByPrimaryKey();
 
     List<Schedule> selectByPrimaryKey(Schedule record);
+
+    List<count> selectCount(String type, String state);
+
+    int selectMaxID();
 }
