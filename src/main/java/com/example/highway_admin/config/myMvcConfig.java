@@ -33,7 +33,7 @@ public class myMvcConfig implements WebMvcConfigurer {
 
         WebMvcConfigurer.super.addCorsMappings(registry);
         registry.addMapping("/**")
-                .allowedOrigins("http://127.0.0.1:80","http://localhost:5173")
+                .allowedOriginPatterns("*")
                 .allowCredentials(true)
                 .allowedMethods("*")
                 .allowedHeaders("*")
