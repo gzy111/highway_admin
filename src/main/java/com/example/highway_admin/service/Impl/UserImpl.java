@@ -71,4 +71,14 @@ public class UserImpl implements UserService {
     public int selectMaxID() {
         return userMapper.selectMaxID();
     }
+
+    @Override
+    public User login(int id, String password) {
+        return userMapper.login(id,password);
+    }
+
+    @Override
+    public User selectUser(int id) {
+        return userMapper.selectUser(id);
+    }
 }

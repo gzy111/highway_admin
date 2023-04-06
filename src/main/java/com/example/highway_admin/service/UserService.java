@@ -25,4 +25,8 @@ public interface UserService {
     PageInfo<User> selectByPrimaryKey(User record);
 
     int selectMaxID();
+
+    User login(int id,String password);
+
+    User selectUser(int id);
 }

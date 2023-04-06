@@ -1,6 +1,7 @@
 package com.example.highway_admin.config;
 
 
+import com.example.highway_admin.interceptor.loginFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +18,12 @@ public class myMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 //        WebMvcConfigurer.super.addInterceptors(registry);
         logger.info("注册拦截器");
-//        registry.addInterceptor(new loginFilter()).addPathPatterns("/**").excludePathPatterns("/users/*");
+        //下面是启用拦截器，拦截请求头没有token的请求
+//        registry.addInterceptor(new loginFilter())
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/login/*","/swagger-ui.html/**","/swagger-resources/**","doc.html#/*");
     }
+
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

@@ -69,10 +69,7 @@ public class AssetsController {
         return jsonModel;
     }
 
-    @GetMapping("/selectById")
-    public Assets selectByPrimaryKey(Integer id) {
-        return assetsService.selectByPrimaryKey(id);
-    }
+
 
     @ApiOperation(value = "更新资产", notes = "成功返回1")
     @ApiImplicitParams({
