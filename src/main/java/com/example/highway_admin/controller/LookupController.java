@@ -61,7 +61,7 @@ public class LookupController {
         return jsonModel;
     }
 
-    @ApiOperation(value = "更新排班", notes = "成功返回1")
+    @ApiOperation(value = "更新中间值", notes = "成功返回1")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "code", value = "编号",dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "typeName", value = "类型名称",dataType = "String", paramType = "query"),
@@ -96,7 +96,7 @@ public class LookupController {
         return jsonModel;
     }
 
-    @ApiOperation(value = "获取排班分页列表", notes = "返回list，")
+    @ApiOperation(value = "获取中间值分页列表", notes = "返回list，")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "typeName", value = "类型名称",dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "pageNum", value = "页数", defaultValue = "1",dataType = "integer", paramType = "query"),
@@ -105,6 +105,7 @@ public class LookupController {
     @GetMapping("/selectPageInfo")
     public JsonModel<PageInfo<Lookup>> selectByPrimaryKey(Lookup record) {
         JsonModel<PageInfo<Lookup>> jsonModel = new JsonModel<>();
+        System.out.println(record);
         try {
             PageInfo<Lookup> pageInfo = lookupService.selectByPrimaryKey(record);
             jsonModel.setData(pageInfo);

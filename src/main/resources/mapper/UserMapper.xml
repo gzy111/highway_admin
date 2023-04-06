@@ -26,7 +26,7 @@
   <sql id="Blob_Column_List" >
     image
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.example.highway_admin.domain.User" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -35,6 +35,9 @@
     <trim prefix="where" prefixOverrides="and |or">
       <if test="id!=null">
         and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="state!=null">
+        and state = #{state,jdbcType=VARCHAR}
       </if>
     </trim>
   </select>
