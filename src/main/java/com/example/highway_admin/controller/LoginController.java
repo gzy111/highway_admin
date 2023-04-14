@@ -10,6 +10,7 @@ import com.example.highway_admin.domain.LoginRequest;
 import com.example.highway_admin.domain.User;
 import com.example.highway_admin.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.swagger.annotations.Api;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/login")
+@Api(tags = "login", value = "登录")
 public class LoginController {
 
     @Autowired
@@ -80,19 +82,21 @@ public class LoginController {
     public Map<String,Object> login(@RequestBody LoginRequest request){
         User userVO = new User();
         int userId = request.getId();
+        String password=request.getPassword();
+        System.out.println("userId"+userId);
+        System.out.println("password"+password);
         String code=request.getPassCode();
-        if (request.getAdminFlg().equals("true")&&code.equals(SMCODE)){
-            userVO=userService.selectUser(1001);
-            System.out.println(code+"   code");
-            System.out.println(SMCODE+"   SMCODE");
-
-        }else {
+//        if (request.getAdminFlg().equals("true")&&code.equals(SMCODE)){
+//            userVO=userService.selectUser(1001);
+//            System.out.println(code+"   code");
+//            System.out.println(SMCODE+"   SMCODE");
+//        }else {
             System.out.println("没有验证码");
-            String password = request.getPassword();
+//            String password = request.getPassword();
             System.out.println(userId);
             System.out.println(password);
             userVO = userService.login(userId,password);
-        }
+//        }
         Map<String,Object> result = new HashMap<>();
         if(userVO==null){
             result.put("msg","登录失败");
@@ -112,7 +116,7 @@ public class LoginController {
             }
             //生成token
             String token = JWTUtil.generateToken(userInfo,privateKey,36000); //token 时间 单位秒
-            result.put("code",200);
+            result.put("code","0000");
             result.put("data",userVO);
             result.put("msg","登录成功");
             result.put("token",token);
