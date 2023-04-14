@@ -2,10 +2,7 @@ package com.example.highway_admin.controller;
 
 
 
-import com.example.highway_admin.Utils.HttpUtils;
-import com.example.highway_admin.Utils.JWTUtil;
-import com.example.highway_admin.Utils.JsonUtil;
-import com.example.highway_admin.Utils.RSAUtil;
+import com.example.highway_admin.Utils.*;
 import com.example.highway_admin.domain.LoginRequest;
 import com.example.highway_admin.domain.User;
 import com.example.highway_admin.service.UserService;
@@ -148,5 +145,13 @@ public class LoginController {
             }
         },5*60*1000); //5分钟内有效果
 
+    }
+
+    @GetMapping("/loginOut")
+    public Map<String,Object>loginOut(){
+        Map<String,Object> result = new HashMap<>();
+        result.put("code","0000");
+        result.put("data","null");
+        return result;
     }
 }
