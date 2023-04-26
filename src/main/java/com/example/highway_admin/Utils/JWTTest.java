@@ -5,11 +5,15 @@ import java.security.PublicKey;
 
 public class JWTTest {
 
-    //公钥
-    private static final String pubKeyPath = "D:/rsa.pub";
+//    //公钥
+//    private static final String pubKeyPath = "D:/rsa.pub";
+//    //私钥
+//    private static final String priKeyPath = "D:/rsa.pri";
 
+    //公钥
+    private static final String pubKeyPath = "/Users/guanziyuan/Documents/biyesheji/highway_vue/jwt/rsa.pub";
     //私钥
-    private static final String priKeyPath = "D:/rsa.pri";
+    private static final String priKeyPath = "/Users/guanziyuan/Documents/biyesheji/highway_vue/jwt/rsa.pri";
 
     private PublicKey publicKey;
 

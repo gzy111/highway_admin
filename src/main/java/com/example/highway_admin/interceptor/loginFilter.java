@@ -16,7 +16,9 @@ import java.util.Map;
 
 public class loginFilter implements HandlerInterceptor {
 
-    private String publicKeyPath="D:/rsa.pub";
+//    private String publicKeyPath="D:/rsa.pub";
+
+    private String publicKeyPath="/Users/guanziyuan/Documents/biyesheji/highway_vue/jwt/rsa.pub";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

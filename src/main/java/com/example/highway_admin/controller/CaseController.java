@@ -33,10 +33,10 @@ public class CaseController {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(caseService.deleteByPrimaryKey(id));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("删除成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("删除失败");
         }
         return jsonModel;
@@ -63,10 +63,10 @@ public class CaseController {
             record.setId(caseService.selectMaxID()+1);
             record.setState("2");
             jsonModel.setData(caseService.insertSelective(record));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("添加成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("添加失败");
         }
         return jsonModel;
@@ -95,10 +95,10 @@ public class CaseController {
             }
 
             jsonModel.setData(caseService.updateByPrimaryKeySelective(record));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("更新成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("更新失败");
         }
 
@@ -128,7 +128,7 @@ public class CaseController {
         PageInfo<Case> equipments = caseService.selectByPrimaryKey(record);
         JsonModel<PageInfo<Case>> jsonModelList = new JsonModel<>();
         jsonModelList.setData(equipments);
-        jsonModelList.setCode(200);
+        jsonModelList.setCode("0000");
         jsonModelList.setMsg("查询成功");
         return jsonModelList;
     }
@@ -153,12 +153,12 @@ public class CaseController {
         System.out.println(record);
         try{
             List<Case> list = caseService.selectCountType(record);
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setData(list);
             jsonModel.setMsg("查询成功");
         }catch (Exception e){
             jsonModel.setMsg("出现异常");
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
         }
 
         return jsonModel;

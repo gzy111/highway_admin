@@ -29,5 +29,7 @@ mybatis:
 pagehelper:
   reasonable: false
   defaultCount: true # ?????????? default-count ???????????????????
-privateKeyPath: D:/rsa.pri
-publicKeyPath: D:/rsa.pub
+#privateKeyPath: D:/rsa.pri
+#publicKeyPath: D:/rsa.pub
+privateKeyPath: /Users/guanziyuan/Documents/biyesheji/highway_vue/jwt/rsa.pri
+publicKeyPath: /Users/guanziyuan/Documents/biyesheji/highway_vue/jwt/rsa.pub

@@ -32,10 +32,10 @@ public class AssetsController {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(assetsService.deleteByPrimaryKey(id));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("删除成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("删除失败");
         }
         return jsonModel;
@@ -60,10 +60,10 @@ public class AssetsController {
             record.setCreateTime(new Date());
             record.setState("0");
             jsonModel.setData(assetsService.insertSelective(record));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("添加成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("添加失败");
         }
         return jsonModel;
@@ -88,10 +88,10 @@ public class AssetsController {
                 record.setFinishTime(new Date());
             }
             jsonModel.setData(assetsService.updateByPrimaryKeySelective(record));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("更新成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("更新失败");
         }
         return jsonModel;
@@ -104,10 +104,10 @@ public class AssetsController {
         JsonModel<List<Assets>> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(assetsService.selectByPrimaryKey());
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("查询成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("查询失败");
         }
         return jsonModel;
@@ -132,10 +132,10 @@ public class AssetsController {
         try {
             PageInfo<Assets> equipments = assetsService.selectByPrimaryKey(record);
             jsonModelList.setData(equipments);
-            jsonModelList.setCode(200);
+            jsonModelList.setCode("0000");
             jsonModelList.setMsg("查询成功");
         }catch (Exception e){
-            jsonModelList.setCode(404);
+            jsonModelList.setCode("404");
             jsonModelList.setMsg("查询失败");
         }
         return jsonModelList;
@@ -151,10 +151,10 @@ public class AssetsController {
         JsonModel<List<count>> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(assetsService.selectCount(assetsType));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("查询成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("查询失败");
         }
 

@@ -33,10 +33,10 @@ public class ScheduleController {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(scheduleService.deleteByPrimaryKey(id));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("删除成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("删除失败");
         }
         return jsonModel;
@@ -58,10 +58,10 @@ public class ScheduleController {
             record.setState("0");
             record.setId(scheduleService.selectMaxID()+1);
             jsonModel.setData(scheduleService.insertSelective(record));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("添加成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("添加失败");
         }
         return jsonModel;
@@ -88,10 +88,10 @@ public class ScheduleController {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(scheduleService.updateByPrimaryKeySelective(record));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("更新成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("更新失败");
         }
         return jsonModel;
@@ -103,10 +103,10 @@ public class ScheduleController {
         JsonModel<List<Schedule>> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(scheduleService.selectByPrimaryKey());
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("查询成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("查询失败");
         }
         return jsonModel;
@@ -127,10 +127,10 @@ public class ScheduleController {
         try {
             PageInfo<Schedule> equipments = scheduleService.selectByPrimaryKey(record);
             jsonModel.setData(equipments);
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("查询成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("查询失败");
         }
         return jsonModel;
@@ -148,10 +148,10 @@ public class ScheduleController {
         JsonModel<List<count>> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(scheduleService.selectCount(type,state));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("查询成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("查询失败");
         }
 

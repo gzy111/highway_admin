@@ -32,10 +32,10 @@ public class UserController {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(userService.deleteByPrimaryKey(id));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("删除成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("删除失败");
         }
         return jsonModel;
@@ -59,10 +59,10 @@ public class UserController {
             record.setCreateTime(new Date());
             record.setId(userService.selectMaxID()+1);
             jsonModel.setData(userService.insertSelective(record));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("添加成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("添加失败");
         }
         return jsonModel;
@@ -74,10 +74,10 @@ public class UserController {
 //        try {
 //         User user=userService.selectByPrimaryKey(id);
 //            jsonModel.setData(user);
-//            jsonModel.setCode(200);
+//            jsonModel.setCode("0000");
 //            jsonModel.setMsg("查询成功");
 //        }catch (Exception e){
-//            jsonModel.setCode(404);
+//            jsonModel.setCode("404");
 //            jsonModel.setMsg("查询失败");
 //        }
 //        return jsonModel;
@@ -100,10 +100,10 @@ public class UserController {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(userService.updateByPrimaryKeySelective(record));
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("更新成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("更新失败");
         }
         return jsonModel;
@@ -115,10 +115,10 @@ public class UserController {
         JsonModel<List<User>> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(userService.selectByPrimaryKey());
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("查询成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("查询失败");
         }
         return jsonModel;
@@ -137,10 +137,10 @@ public class UserController {
         try {
             PageInfo<User> pageInfo = userService.selectByPrimaryKey(record);
             jsonModel.setData(pageInfo);
-            jsonModel.setCode(200);
+            jsonModel.setCode("0000");
             jsonModel.setMsg("查询成功");
         }catch (Exception e){
-            jsonModel.setCode(404);
+            jsonModel.setCode("404");
             jsonModel.setMsg("查询失败");
         }
         return jsonModel;

@@ -2,7 +2,7 @@ package com.example.highway_admin.Utils;
 
 public class JsonModel<T> {
     private String msg;
-    private int code=200;
+    private String code="0000";
     private T data;
     private Integer count;
 
@@ -14,11 +14,11 @@ public class JsonModel<T> {
         this.msg = msg;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
