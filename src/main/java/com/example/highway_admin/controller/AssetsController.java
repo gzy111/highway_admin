@@ -58,7 +58,7 @@ public class AssetsController {
             record.setCreateTime(new Date());
             record.setId(assetsService.selectMaxID()+1);
             record.setCreateTime(new Date());
-            record.setState("0");
+            record.setState("false");
             jsonModel.setData(assetsService.insertSelective(record));
             jsonModel.setCode("0000");
             jsonModel.setMsg("添加成功");
