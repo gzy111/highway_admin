@@ -51,14 +51,14 @@ public class AssetsController {
             @ApiImplicitParam(name = "assetsData", value = "资产信息", dataType = "String", paramType = "query"),
     })
     @PostMapping("/insert")
-    public JsonModel<Integer> insertSelective(Assets record) {
+    public JsonModel<Integer> insertSelective( @RequestBody Assets record) {
         System.out.println(record);
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             record.setCreateTime(new Date());
             record.setId(assetsService.selectMaxID()+1);
             record.setCreateTime(new Date());
-            record.setState("false");
+
             jsonModel.setData(assetsService.insertSelective(record));
             jsonModel.setCode("0000");
             jsonModel.setMsg("添加成功");

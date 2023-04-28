@@ -27,7 +27,7 @@ public class CaseController {
     @GetMapping("/delete")
     @ApiOperation(value = "删除案件", notes = "成功返回1")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "案件id",required = true,dataType = "integer", paramType = "query"),
+            @ApiImplicitParam(name = "id", value = "案件id",required = true,dataType = "integer"),
     })
     public JsonModel<Integer> deleteByPrimaryKey(Integer id) {
         JsonModel<Integer> jsonModel = new JsonModel<>();
@@ -55,7 +55,7 @@ public class CaseController {
             @ApiImplicitParam(name = "data", value = "案件信息", dataType = "String", paramType = "query"),
     })
     @PostMapping("/insert")
-    public JsonModel<Integer>  insertSelective(  Case record) {
+    public JsonModel<Integer>  insertSelective( @RequestBody Case record) {
         System.out.println(record);
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
