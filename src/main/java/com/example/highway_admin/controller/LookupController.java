@@ -48,7 +48,7 @@ public class LookupController {
             @ApiImplicitParam(name = "codeName", value = "编号名称",dataType = "Date",paramType = "query"),
     })
     @PostMapping("/insert")
-    public JsonModel<Integer> insertSelective(@RequestBody Lookup record) {
+    public JsonModel<Integer> insertSelective( Lookup record) {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             jsonModel.setData(lookupService.insertSelective(record));

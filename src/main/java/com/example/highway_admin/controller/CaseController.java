@@ -55,7 +55,7 @@ public class CaseController {
             @ApiImplicitParam(name = "data", value = "案件信息", dataType = "String", paramType = "query"),
     })
     @PostMapping("/insert")
-    public JsonModel<Integer>  insertSelective( @RequestBody Case record) {
+    public JsonModel<Integer>  insertSelective(  Case record) {
         System.out.println(record);
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {

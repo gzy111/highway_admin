@@ -52,7 +52,7 @@ public class ScheduleController {
             @ApiImplicitParam(name = "data", value = "排班信息", dataType = "String", paramType = "query"),
     })
     @PostMapping("/insert")
-    public JsonModel<Integer> insertSelective(@RequestBody Schedule record) {
+    public JsonModel<Integer> insertSelective( Schedule record) {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             record.setState("0");
