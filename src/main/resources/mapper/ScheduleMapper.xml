@@ -39,6 +39,9 @@
       <if test="state!=null">
         and state = #{state,jdbcType=VARCHAR}
       </if>
+      <if test="type!=null">
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
       <if test="userId!=null">
         and user_id  like concat('%',#{user_id,jdbcType=VARCHAR},'%')
       </if>
