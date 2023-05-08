@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,8 @@ public class ScheduleController {
     })
     @PostMapping("/insert")
     public JsonModel<Integer> insertSelective( Schedule record) {
+            System.out.println(record);
+
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             record.setState("0");
