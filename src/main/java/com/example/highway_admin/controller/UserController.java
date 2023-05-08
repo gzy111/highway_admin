@@ -52,7 +52,7 @@ public class UserController {
             @ApiImplicitParam(name = "role", value = "角色", dataType = "String", paramType = "query"),
     })
     @PostMapping("/insert")
-    public JsonModel<Integer> insertSelective(  User record) {
+    public JsonModel<Integer> insertSelective( @RequestBody User record) {
         JsonModel<Integer> jsonModel = new JsonModel<>();
         try {
             record.setState("1");
