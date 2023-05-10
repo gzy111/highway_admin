@@ -36,7 +36,7 @@
     from `case`
     <trim prefix="where" prefixOverrides="and |or">
       <if test="id!=null">
-        and id = #{id,jdbcType=INTEGER}
+        and id like concat('%',#{id},'%')
       </if>
       <if test="state != null" >
         and state = #{state,jdbcType=VARCHAR}
