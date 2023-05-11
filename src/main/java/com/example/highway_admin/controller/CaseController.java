@@ -1,6 +1,7 @@
 package com.example.highway_admin.controller;
 
 import com.example.highway_admin.Utils.JsonModel;
+import com.example.highway_admin.base.count;
 import com.example.highway_admin.base.countTable;
 import com.example.highway_admin.domain.Case;
 import com.example.highway_admin.service.CaseService;
@@ -144,12 +145,21 @@ public class CaseController {
         JsonModel<List<Case>> jsonModel = new JsonModel<>();
         System.out.println(caseType+"  "+detailedType);
         Case record= new Case();
-        if (!caseType.equals("")){
-            record.setCaseType(caseType);
+        try {
+            if (!caseType.equals(null)){
+                record.setCaseType(caseType);
+                System.out.println("tpye");
+            }
+        }catch (Exception e){
         }
-        if (!detailedType.equals("")){
-            record.setDetailedType(detailedType);
-        }
+       try {
+           if (!detailedType.equals(null)){
+               record.setDetailedType(detailedType);
+               System.out.println("de");
+           }
+       }catch (Exception e){
+       }
+
         System.out.println(record);
         try{
             List<Case> list = caseService.selectCountType(record);
@@ -159,6 +169,26 @@ public class CaseController {
         }catch (Exception e){
             jsonModel.setMsg("出现异常");
             jsonModel.setCode("404");
+        }
+
+        return jsonModel;
+    }
+
+    @GetMapping("/selectCount")
+    @ApiOperation(value = "获取案件总数", notes = "返回list，当需要事故类型数量时，detailedType可任意传入值,当不传入任何值时，所获取count为所有案件数量")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "caseType", value = "案件类型", defaultValue = "0",dataType = "String", paramType =
+                    "query"),
+    })
+    public JsonModel<List<count>> selectCount(String caseType) {
+        JsonModel<List<count>> jsonModel = new JsonModel<>();
+        try {
+            jsonModel.setData(caseService.selectCount(caseType));
+            jsonModel.setCode("0000");
+            jsonModel.setMsg("查询成功");
+        }catch (Exception e){
+            jsonModel.setCode("404");
+            jsonModel.setMsg("查询失败");
         }
 
         return jsonModel;

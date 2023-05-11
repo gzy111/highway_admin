@@ -15,7 +15,10 @@
     <result column="NewCount" property="newCount" javaType="INTEGER"/>
   </resultMap>
 
-
+  <resultMap id="CountMap" type="com.example.highway_admin.base.count">
+    <result column="case_type" property="name" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
 
   <resultMap id="ResultMapWithBLOBs" type="com.example.highway_admin.domain.Case" extends="BaseResultMap" >
     <result column="data" property="data" jdbcType="LONGVARCHAR" />
@@ -69,6 +72,21 @@
     <trim prefix="group by " prefixOverrides="and |or">
       <if test="detailedType!=null">
         and detailed_type
+      </if>
+    </trim>
+  </select>
+
+
+  <select id="selectCount" resultMap="CountMap">
+    SELECT
+    <if test="caseType!=null">
+      case_type ,
+    </if>
+    COUNT(1) as  count
+    FROM `case`
+    <trim prefix="group by " prefixOverrides="and |or">
+      <if test="caseType!=null">
+        and case_type
       </if>
     </trim>
   </select>

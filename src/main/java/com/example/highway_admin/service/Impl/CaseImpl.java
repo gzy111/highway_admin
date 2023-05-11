@@ -1,5 +1,6 @@
 package com.example.highway_admin.service.Impl;
 
+import com.example.highway_admin.base.count;
 import com.example.highway_admin.domain.Case;
 import com.example.highway_admin.mapper.CaseMapper;
 import com.example.highway_admin.service.CaseService;
@@ -64,6 +65,11 @@ public class CaseImpl implements CaseService {
     @Override
     public List<Case> selectCountType(Case record) {
         return caseMapper.selectCountType(record);
+    }
+
+    @Override
+    public List<count> selectCount(String caseType) {
+        return caseMapper.selectCount(caseType);
     }
 
     @Override
