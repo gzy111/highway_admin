@@ -94,7 +94,6 @@ public class CaseController {
             }else if(record.getState().equals("1")){
                 record.setFinishTime(new Date());
             }
-
             jsonModel.setData(caseService.updateByPrimaryKeySelective(record));
             jsonModel.setCode("0000");
             jsonModel.setMsg("更新成功");

@@ -28,6 +28,7 @@ public class LoginController {
     private String privateKeyPath;
 
     private String SMCODE="";
+    private boolean codeT=false;
     public static StringBuilder getRandom() {
         Random random = new Random();
         StringBuilder stringBuilder = new StringBuilder();
@@ -82,18 +83,19 @@ public class LoginController {
         String password=request.getPassword();
         System.out.println("userId"+userId);
         System.out.println("password"+password);
-        String code=request.getPassCode();
-//        if (request.getAdminFlg().equals("true")&&code.equals(SMCODE)){
-//            userVO=userService.selectUser(1001);
-//            System.out.println(code+"   code");
-//            System.out.println(SMCODE+"   SMCODE");
-//        }else {
+//        String code=request.getPassCode();
+        if (codeT&&password.equals(SMCODE)){
+            userVO=userService.selectUser(userId);
+            System.out.println(password+"   password");
+            System.out.println(SMCODE+"   SMCODE");
+        }else {
             System.out.println("没有验证码");
 //            String password = request.getPassword();
             System.out.println(userId);
             System.out.println(password);
             userVO = userService.login(userId,password);
-//        }
+        }
+        codeT=false;
         Map<String,Object> result = new HashMap<>();
         if(userVO==null){
             result.put("msg","登录失败");
@@ -124,13 +126,15 @@ public class LoginController {
 
 
     @GetMapping("/getCode")
-    public void code(@RequestParam(value = "id") int id){
-        if (id==1001){
+    public Map<String,Object> code(@RequestParam(value = "id") int id){
+        System.out.println(id);
+
             String phone= userService.selectUser(id).getPhone();
-//            SMCODE=getSMCode(phone);
-            SMCODE="123456";
+        System.out.println(phone);
+            SMCODE=getSMCode(phone);
+//            SMCODE="123";
             System.out.println(SMCODE);
-        }
+        codeT=true;
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -144,7 +148,10 @@ public class LoginController {
                 }
             }
         },5*60*1000); //5分钟内有效果
-
+        Map<String,Object> result = new HashMap<>();
+        result.put("code","0000");
+        result.put("msg","获取认证码成功");
+        return result;
     }
 
     @GetMapping("/loginOut")
